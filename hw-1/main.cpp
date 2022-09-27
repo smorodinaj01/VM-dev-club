@@ -227,9 +227,6 @@ void LargerEqual() {
     assert(z1>=z2);
     std::cout << "Test 25 OK" << std::endl;
 }
-
-
-// Тесты на оператор ввода , вывода
  
 
 int main(){
@@ -256,7 +253,7 @@ int main(){
     NotEqual();
     Larger();
     LargerEqual();
-  // Тесты на оператор ввода , вывода
+ 
     return 0;
 }
 

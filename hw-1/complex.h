@@ -42,7 +42,7 @@ struct Complex
     bool operator == (Complex);  
     bool operator != (Complex);
 
-    // оператор сравнения по модулю...
+    // операторы сравнения по модулю
     bool operator >  (Complex); 
     bool operator >= (Complex); 
     bool operator <  (Complex); 
