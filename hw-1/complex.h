@@ -4,21 +4,16 @@
 #include <iostream>
 #include <cmath>
  
-struct Complex {
-private:
+const float EPSILON = pow(10, -7);
+
+struct Complex 
+{
     float real;
     float imag;
 
-public:
     Complex(void);
-    Complex(float);
     Complex(float, float);	
     ~Complex();
- 
-    float re(void);
-    float im(void);
-    float re(Complex);
-    float im(Complex);
 
     Complex conj(void);
     Complex conj(Complex);
@@ -27,24 +22,22 @@ public:
     float norm(void);
     float norm(Complex);
   
-    // Оператор присваивания
-    const Complex& operator = (Complex);    // было без конст
+    const Complex& operator = (const Complex&);
 
     Complex operator + (Complex);  
     Complex operator - (Complex);    
     Complex operator * (Complex);
     Complex operator / (Complex);
 
-
     Complex operator + (float);
     Complex operator - (float);
     Complex operator * (float);
     Complex operator / (float);
 
-    Complex& operator += (Complex);
-    Complex& operator -= (Complex);
-    Complex& operator *= (Complex); 
-    Complex& operator /= (Complex);
+    const Complex& operator += (const Complex&);
+    const Complex& operator -= (const Complex&);
+    const Complex& operator *= (const Complex&); 
+    const Complex& operator /= (const Complex&);
    
     bool operator == (Complex);  
     bool operator != (Complex);
@@ -55,10 +48,10 @@ public:
     bool operator <  (Complex); 
     bool operator <= (Complex); 
 
-    friend std::istream& operator >> (std::istream&, Complex); 
-    friend std::ostream& operator << (std::ostream&, Complex); 
 };
 
+std::istream& operator >> (std::istream&, Complex); 
+std::ostream& operator << (std::ostream&, Complex); 
 
 Complex operator + (float, Complex);
 Complex operator - (float, Complex);

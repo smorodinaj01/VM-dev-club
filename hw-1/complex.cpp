@@ -7,11 +7,6 @@ Complex::Complex(void) {
     imag = 0.0;
 }
 
-Complex::Complex(float r) {
-    real = r; 
-    imag = 0.0;
-}
-
 Complex::Complex(float re, float im) {
     real = re; 
     imag = im;
@@ -19,37 +14,20 @@ Complex::Complex(float re, float im) {
 
 Complex::~Complex(){}
 
- 
-float Complex::re(void) { 
-    return(this->real); 
-}
- 
-float Complex::im(void) { 
-    return(this->imag); 
-}
-
-float re(Complex z) { 
-    return z.re(); 
-}
-
-float im(Complex z) { 
-    return z.im(); 
-}
-
 Complex Complex::conj(void) { 
     return Complex(this->real, -this->imag); 
 }
 
 Complex conj(Complex z) { 
-    return Complex(z.re(),-z.im()); 
+    return Complex(z.real, -z.imag); 
 }
 
 float Complex::abs(void) { 
-    return sqrt(real*real+imag*imag); 
+    return sqrt(real*real + imag*imag); 
 }
 
 float abs(Complex z) { 
-    return sqrt(z.re()*z.re()+z.im()*z.im()); 
+    return sqrt(z.real*z.real + z.imag*z.imag); 
 }
 
 float Complex::norm(void) { 
@@ -57,52 +35,40 @@ float Complex::norm(void) {
 }
 
 float norm(Complex z) { 
-    return z.re()*z.re()+z.im()*z.im(); 
+    return z.real*z.real + z.imag*z.imag; 
 }
 
-/////////////////////
 
-  
-const Complex& Complex::operator = (Complex z) 
+const Complex& Complex::operator = (const Complex& z) 
 {  
     this->real = z.real; 
     this->imag = z.imag; 
     return *this;
-}  
+} 
+
  
-Complex Complex::operator+(Complex z) 
-{ 
-    this->real = this->real + z.real; 
-    this->imag = this->imag + z.imag; 
-    return *this;
+
+Complex Complex::operator + (Complex z) { 
+    return Complex(this->real + z.real, this->imag + z.imag);
 } 
  
-Complex Complex::operator-(Complex z) 
-{ 
-    this->real = this->real - z.real; 
-    this->imag = this->imag - z.imag; 
-    return *this;
+Complex Complex::operator -(Complex z) { 
+    return Complex(this->real - z.real, this->imag - z.imag);
 }
 
-Complex Complex::operator * (Complex z) {  
-    float a, b;  
-    a = real * z.real - imag * z.imag; 
-    b = real * z.imag + z.real * imag; 
-    real = a; 
-    imag = b; 
-    return *this; 
+Complex Complex::operator * (Complex z) { 
+    float a, b;
+    a = real*z.real - imag*z.imag;
+    b = real*z.imag + imag*z.real;
+    return Complex (a, b); 
 } 
- 
 
-Complex Complex::operator/(Complex z)
-{
-  Complex top((*this)*z.conj());
-  double bottom(z.norm());
-  Complex res(top/bottom);
-  return res;
+Complex Complex::operator / (Complex z) {
+    Complex top((*this)*z.conj());
+    float bottom(z.norm());
+    Complex res(top/bottom);
+    return res;
 }
-
-//////////////////////
 
 Complex Complex::operator + (float a) {
     return Complex(this->real+a, this->imag);
@@ -119,36 +85,33 @@ Complex Complex::operator * (float a) {
 Complex Complex::operator / (float a) {
     return Complex(this->real/a, this->imag/a);
 }
-///////////////////////
 
-Complex& Complex::operator += (Complex z) {
+const Complex& Complex::operator += (const Complex& z) {
     this->real += z.real;
     this->imag += z.imag;
     return *this;
 }
 
-Complex& Complex::operator -= (Complex z) {
+const Complex& Complex::operator -= (const Complex& z) {
     this->real -= z.real;
     this->imag -= z.imag;
     return *this;
 }
  
-Complex& Complex::operator *= (Complex z) { 
+const Complex& Complex::operator *= (const Complex& z) { 
     this->real *= z.real; 
     this->imag *= z.imag; 
     return *this;
 } 
  
-Complex& Complex::operator /= (Complex z) { 
+const Complex& Complex::operator /= (const Complex& z) { 
     this->real /= z.real; 
     this->imag /= z.imag; 
     return *this;
 } 
  
-////////////////////////////// 
- 
 bool Complex::operator == (Complex z) {
-    if (this->real == z.real && this->imag == z.imag) {
+    if ((this->real - z.real < EPSILON) && (this->imag - z.imag) < EPSILON) {
         return true;
     } else {
         return false;
@@ -156,7 +119,7 @@ bool Complex::operator == (Complex z) {
 }
 
 bool Complex::operator != (Complex z) {  
-    if (this->real != z.real || this->imag != z.imag) { 
+    if ((this->real - z.real) > EPSILON || (this->imag - z.imag) > EPSILON) { 
        return true; 
     } else {  
         return false;
@@ -195,17 +158,16 @@ bool Complex::operator <= (Complex z) {
     }
 }
 
-//////////////////////////
 Complex operator + (float a, Complex z) {
-    return Complex(a+z.re(), z.im());
+    return Complex(a + z.real, z.imag);
 }
 
 Complex operator - (float a, Complex z) {
-    return Complex(a-z.re(), -z.im());
+    return Complex(a - z.real, -z.imag);
 }
 
 Complex operator * (float a, Complex z) {
-    return Complex(a*z.re(), a*z.im());
+    return Complex(a * z.real, a * z.imag);
 }
 
 Complex operator / (float a, Complex z) {
