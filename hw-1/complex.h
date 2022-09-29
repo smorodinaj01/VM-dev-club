@@ -2,42 +2,42 @@
 #define COMPLEX_NUMBER_H
  
 #include <iostream>
-#include <cmath>
- 
-const float EPSILON = pow(10, -7);
+#include <cmath> 
 
-struct Complex 
-{
+struct Complex {
     float real;
     float imag;
+    static float EPSILON() {
+        return  pow(10, -7);
+    }
 
-    Complex(void);
+    Complex();
     Complex(float, float);	
     ~Complex();
 
-    Complex conj(void);
-    Complex conj(Complex);
-    float abs(void);
-    float abs(Complex);
-    float norm(void);
-    float norm(Complex);
-  
+    Complex conj();
+    float abs();
+    float norm();
+
     const Complex& operator = (const Complex&);
 
-    Complex operator + (Complex);  
-    Complex operator - (Complex);    
-    Complex operator * (Complex);
-    Complex operator / (Complex);
+    Complex operator+ () const;
+    Complex operator- () const;
 
-    Complex operator + (float);
-    Complex operator - (float);
-    Complex operator * (float);
-    Complex operator / (float);
+    Complex operator + (const Complex&) const;  
+    Complex operator - (const Complex&) const;    
+    Complex operator * (const Complex&) const;
+    Complex operator / (Complex) const;
+
+    Complex operator + (float) const;
+    Complex operator - (float) const;
+    Complex operator * (float) const;
+    Complex operator / (float) const;
 
     const Complex& operator += (const Complex&);
     const Complex& operator -= (const Complex&);
     const Complex& operator *= (const Complex&); 
-    const Complex& operator /= (const Complex&);
+    const Complex& operator /= (Complex);
    
     bool operator == (Complex);  
     bool operator != (Complex);
@@ -58,6 +58,6 @@ Complex operator - (float, Complex);
 Complex operator * (float, Complex);
 Complex operator / (float, Complex);
 
-static Complex i = Complex(0.0, 1.0);
+static Complex i = Complex (0.0, 1.0);
 
 #endif
