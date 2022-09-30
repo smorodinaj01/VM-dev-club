@@ -33,11 +33,11 @@ float Complex::module(float a, float b){
     }
 }
 
-Complex Complex::operator+ () const {
+Complex Complex::operator + () const {
     return Complex(real, imag);
 }
 
-Complex Complex::operator- () const {
+Complex Complex::operator - () const {
     return Complex(-real, -imag);
 }
 

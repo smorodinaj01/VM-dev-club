@@ -2,7 +2,7 @@
 #define COMPLEX_NUMBER_H
  
 #include <iostream>
-#include <cmath> 
+#include <cmath>
 
 struct Complex {
     float real;
@@ -21,8 +21,8 @@ struct Complex {
 
     const Complex& operator = (const Complex&);
 
-    Complex operator+ () const;
-    Complex operator- () const;
+    Complex operator + () const;
+    Complex operator - () const;
 
     Complex operator + (const Complex&) const;  
     Complex operator - (const Complex&) const;    
@@ -42,7 +42,6 @@ struct Complex {
     bool operator == (Complex);  
     bool operator != (Complex);
 
-    // операторы сравнения по модулю
     bool operator >  (Complex); 
     bool operator >= (Complex); 
     bool operator <  (Complex); 
