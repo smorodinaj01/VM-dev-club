@@ -1,6 +1,7 @@
 #include "complex.h"
 #include <cassert>
 
+static Complex i = Complex (0.0, 1.0);
  
 void DefaultConstructor(){
     Complex z;
@@ -55,7 +56,7 @@ void Conjugate() {
 }
 
 
-void Module() {
+void Abs() {
     Complex z = 3 + 4*i;
     assert(5 == z.abs());
     std::cout << "Test 6 OK" << std::endl;
@@ -211,7 +212,7 @@ void FloatPlusComplex() {
     float f = 29;
     Complex z = -120 + 7*i;
     Complex ans = f + z;
-    assert(149 == ans.real);
+    assert(-91 == ans.real);
     assert(7 == ans.imag);
     std::cout << "Test 22 OK" << std::endl;
 }
@@ -224,8 +225,9 @@ void FloatMinusComplex() {
     assert(-7 == ans.imag);
     std::cout << "Test 23 OK" << std::endl;
 }
-
-void FloatMultiplyComplex() {
+ 
+ 
+void FloatMultiplyByComplex() {
     float a = 4;
     Complex z = -12 + 7*i;
     Complex ans = a * z;
@@ -234,12 +236,12 @@ void FloatMultiplyComplex() {
     std::cout << "Test 24 OK" << std::endl;
 }
 
-void DivideFloatByComplex() {
-    float f = 5.0;
-    Complex z1 = 1 + i;
-    Complex z2 = f/z1;
+void FloatDivideByComplex() {
+    float f = 2.0;
+    Complex z1 = 5 + i;
+    Complex z2 = z1/f;
     assert(2.5 == z2.real);
-    assert(-2.5 == z2.imag);
+    assert(0.5 == z2.imag);
     std::cout << "Test 25 OK" << std::endl;
 }
 
@@ -297,7 +299,7 @@ int main(){
     AssignmentInput();
 
     Conjugate();
-    Module();
+    Abs();
     Norm();
 
     UnaryPlus();
@@ -318,10 +320,10 @@ int main(){
     MultiplyEqual();
     DevideEqual();
 
-    FloatPlusComplex;
-    FloatMinusComplex;
-    FloatMultiplyComplex;
-    DivideFloatByComplex(); 
+    FloatPlusComplex(); 
+    FloatMinusComplex();
+    FloatMultiplyByComplex(); 
+    FloatDivideByComplex();
 
     Equal(); 
     NotEqual();

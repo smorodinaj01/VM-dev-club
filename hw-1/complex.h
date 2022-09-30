@@ -7,9 +7,8 @@
 struct Complex {
     float real;
     float imag;
-    static float EPSILON() {
-        return  pow(10, -7);
-    }
+
+    const float EPSILON = pow(10, -7);
 
     Complex();
     Complex(float, float);	
@@ -18,6 +17,7 @@ struct Complex {
     Complex conj();
     float abs();
     float norm();
+    float module(float, float);
 
     const Complex& operator = (const Complex&);
 
@@ -57,7 +57,5 @@ Complex operator + (float, Complex);
 Complex operator - (float, Complex);
 Complex operator * (float, Complex);
 Complex operator / (float, Complex);
-
-static Complex i = Complex (0.0, 1.0);
 
 #endif

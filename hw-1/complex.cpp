@@ -25,6 +25,14 @@ float Complex::norm() {
     return real*real + imag*imag; 
 }
 
+float Complex::module(float a, float b){
+    if (a - b > 0){
+        return a-b;
+    } else{
+        return b-a;
+    }
+}
+
 Complex Complex::operator+ () const {
     return Complex(real, imag);
 }
@@ -40,12 +48,11 @@ const Complex& Complex::operator = (const Complex& z)
     return *this;
 } 
 
-
 Complex Complex::operator + (const Complex& z) const { 
     return Complex(real + z.real, imag + z.imag);
 } 
  
-Complex Complex::operator -(const Complex& z) const { 
+Complex Complex::operator - (const Complex& z) const { 
     return Complex(real - z.real, imag - z.imag);
 }
 
@@ -90,8 +97,6 @@ const Complex& Complex::operator -= (const Complex& z) {
     return *this;
 }
 
-
-/////////////
 const Complex& Complex::operator *= (const Complex& z) { 
     float a = real*z.real - imag*z.imag; 
     float b = real*z.imag + imag*z.real; 
@@ -110,7 +115,7 @@ const Complex& Complex::operator /= (Complex z) {
 
  
 bool Complex::operator == (Complex z) {
-    if ((real - z.real < EPSILON() && imag - z.imag < EPSILON())&&(real==z.real && imag == z.imag)) {
+    if (module(real, z.real) < EPSILON && module(imag, z.imag) < EPSILON) {
         return true;
     } else {
         return false;
@@ -118,7 +123,7 @@ bool Complex::operator == (Complex z) {
 }
 
 bool Complex::operator != (Complex z) {  
-    if (real - z.real > EPSILON() || imag - z.imag > EPSILON()) { 
+    if (module(real, z.real) > EPSILON || module(imag, z.imag) > EPSILON) { 
        return true; 
     } else {  
         return false;
@@ -170,8 +175,7 @@ Complex operator * (float a, Complex z) {
 }
 
 Complex operator / (float a, Complex z) {
-    Complex  x = (a + 0*i)/z;
-    return x;
+    return Complex(a*z.real/z.norm(), a*z.imag/ z.norm());
 }
 
 std::ostream& operator << (std::ostream& stream,  Complex z) {  
