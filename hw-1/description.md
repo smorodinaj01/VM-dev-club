@@ -1,17 +1,14 @@
-# Формулировка задания
+# Task formulation
 
-Реализовать структуру комплексное число на С++:
- - Простейшие методы и конструкторы для работы с ним
- - Операторы для арифметики комплексных чисел:
-   - Сумма и вычитание комплексных чисел между собой и с примитивом
-   - Произведение и деление комплексных чисел между собой и с примитивом
-   - Оператор присваивания
-   - Унарные операторы + и -
-   - Операторы сравнения комплексных чисел
- - Реализовать автоматическое тестирование всего функционала комплексного числа
+Implement a complex number structure in C++:
+  - The simplest methods and constructors for working with it
+  - Operators for complex number arithmetic:
+    - Sum and subtract complex numbers between themselves and with a primitive
+    - Product and division of complex numbers among themselves and with a primitive
+    - Assignment operator
+    - Unary operators + and -
+    - Comparison operators for complex numbers
+  - Implement automatic testing of the entire complex number functionality
+ 
 
-Компиляция через консоль bash (linux, mac, WSL для виндовс), стандарт языка C++17. 
-
-Компилятор clang++ или g++, любой версии
-
-Используйте механизмы С++ и библиотеки по необходимости, но будьте готовы пояснить их необходимость
+ 

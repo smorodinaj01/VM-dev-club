@@ -2,24 +2,22 @@
 #define COMPLEX_NUMBER_H
  
 #include <iostream>
-#include <cmath>
 
 struct Complex {
     float real;
     float imag;
-
-    const float EPSILON = pow(10, -7);
+    static constexpr float EPSILON = 0.0000001;
 
     Complex();
     Complex(float, float);	
+    Complex(const Complex& other);
     ~Complex();
 
-    Complex conj();
-    float abs();
-    float norm();
-    float module(float, float);
+    Complex conj() const;
+    float module() const;
+    float norm() const;
 
-    const Complex& operator = (const Complex&);
+    Complex operator = (const Complex&);
 
     Complex operator + () const;
     Complex operator - () const;
@@ -27,30 +25,28 @@ struct Complex {
     Complex operator + (const Complex&) const;  
     Complex operator - (const Complex&) const;    
     Complex operator * (const Complex&) const;
-    Complex operator / (Complex) const;
+    Complex operator / (const Complex&) const;
 
-    Complex operator + (float) const;
-    Complex operator - (float) const;
-    Complex operator * (float) const;
-    Complex operator / (float) const;
+    Complex operator + (const float&) const;
+    Complex operator - (const float&) const;
+    Complex operator * (const float&) const;
+    Complex operator / (const float&) const;
+
 
     const Complex& operator += (const Complex&);
     const Complex& operator -= (const Complex&);
     const Complex& operator *= (const Complex&); 
-    const Complex& operator /= (Complex);
+    const Complex& operator /= (const Complex&);
    
-    bool operator == (Complex);  
-    bool operator != (Complex);
+   
+    bool operator == (const Complex&) const;  
+    bool operator != (const Complex&) const;
 
-    bool operator >  (Complex); 
-    bool operator >= (Complex); 
-    bool operator <  (Complex); 
-    bool operator <= (Complex); 
-
+    bool operator >  (const Complex&) const; 
+    bool operator >= (const Complex&) const; 
+    bool operator <  (const Complex&) const; 
+    bool operator <= (const Complex&) const; 
 };
-
-std::istream& operator >> (std::istream&, Complex); 
-std::ostream& operator << (std::ostream&, Complex); 
 
 Complex operator + (float, Complex);
 Complex operator - (float, Complex);
